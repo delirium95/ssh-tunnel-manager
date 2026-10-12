@@ -1,0 +1,54 @@
+# Compatible with Boring's tunnel configuration format.
+# SSH aliases and authentication come from ~/.ssh/config and ssh-agent.
+keep_alive = 30
+reconnect_timeout = 900
+
+[[tunnels]]
+name = "dev-db"
+group = "development"
+host = "dev-server"
+local = 5433
+remote = "127.0.0.1:5432"
+
+[[tunnels]]
+name = "dev-web"
+group = "development"
+host = "dev-server"
+local = "127.0.0.1:8080"
+remote = "127.0.0.1:3000"
+
+[[tunnels]]
+name = "reverse-web"
+host = "dev-server"
+mode = "remote"
+local = "127.0.0.1:3000"
+remote = 8081
+
+[[tunnels]]
+name = "proxy"
+host = "dev-server"
+mode = "socks"
+local = 1080
+
+[[tunnels]]
+name = "reverse-proxy"
+host = "dev-server"
+mode = "socks-remote"
+remote = 1081
+
+# Unix sockets (requires server-side StreamLocal forwarding support):
+# [[tunnels]]
+# name = "unix-service"
+# host = "dev-server"
+# local = "/tmp/boring-local.sock"
+# remote = "/run/service.sock"
+
+# Explicit SSH settings and environment expansion:
+# [[tunnels]]
+# name = "staging"
+# host = "${STAGING_HOST:-staging.example.com}"
+# user = "${SSH_USER:-deploy}"
+# port = 2222
+# identity = "~/.ssh/id_staging"
+# local = 9000
+# remote = "database.internal:5432"

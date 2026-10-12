@@ -1,0 +1,33 @@
+[package]
+name = "ssh-tunnel-manager"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+description = "A Rust SSH tunnel manager inspired by Boring"
+license = "MIT"
+repository = "https://github.com/delirium95/ssh-tunnel-manager"
+default-run = "boring-rs"
+
+[[bin]]
+name = "boring-rs"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env"] }
+clap_complete = "4"
+signal-hook = "0.3"
+fs2 = "0.4"
+glob = "0.3"
+libc = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+shlex = "1"
+toml = "0.9"
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+lto = "thin"
+strip = true
